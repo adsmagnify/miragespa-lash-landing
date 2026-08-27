@@ -119,20 +119,25 @@ Conversion elements carry `data-cta="<name>"`:
 
 | `data-cta` | Location | Target |
 |---|---|---|
-| `topbar` | Sticky topbar button | scrolls to `#enrol` |
-| `hero-primary` | Hero button | scrolls to `#enrol` |
-| `info-box` | Course info box | scrolls to `#enrol` |
-| `pricing-card` | Pricing card button | `https://miragespa.ca/register-now-2-2/` |
-| `footer-primary` | Closing CTA | `https://miragespa.ca/register-now-2-2/` |
+| `topbar` | Sticky topbar button | scrolls to `#register` |
+| `hero-primary` | Hero button | scrolls to `#register` |
+| `info-box` | Course info box | scrolls to `#register` |
+| `pricing-card` | Pricing card button | scrolls to `#register` |
+| `footer-primary` | Closing CTA | scrolls to `#register` |
 | `footer-call` | Closing CTA | `tel:18888292607` |
 
 `assets/landing/landing.js` forwards these clicks to `gtag` / `fbq` when present. Add
 the actual tag in `<head>`.
 
+The **Register** section embeds the same Zoho **Contact Us** form used on
+`miragespa.ca/register-now-2-2/`. It posts to Zoho (not the main site). After submit,
+Zoho sends the visitor to this landing domain’s `thank-you.html`.
+
 ## Known follow-ups
 
-- **No lead form.** CTAs point to the registration page on the main site. An on-page
-  form posting to your own handler usually converts better on paid traffic.
+- **Lead form is on-page.** Register CTAs stay on this landing page and submit to
+  the same Zoho Contact Us form as the main site. After submit, visitors land on
+  `thank-you.html` here — not miragespa.ca.
 - **Page weight ≈ 4 MB uncompressed** (1.7 MB CSS, 980 KB JS, 1 MB hero image,
   300 KB icon font). That is what the live site loads too — the cost of exact parity.
   If ad performance matters more than parity, the wins are: convert the hero to WebP,
