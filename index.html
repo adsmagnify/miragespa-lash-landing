@@ -41,7 +41,7 @@
 <link href="assets/section-css/hero-react.css" rel="stylesheet"/>
 <link href="assets/section-css/footer.css" rel="stylesheet"/>
 <link href="assets/section-css/funding.css" rel="stylesheet"/>
-<link href="assets/landing/landing.css" rel="stylesheet"/>
+<link href="assets/landing/landing.css?v=5" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
 </head>
 
@@ -117,7 +117,6 @@
           <li><a href="tel:1 (888) 829-2607">1 (888) 829-2607</a></li>
           <li><a href="mailto:info@mirageeducation.com">info@mirageeducation.com</a></li>
         </ul>
-        <a class="ed-btn lp-topbar-cta" href="#register" data-cta="topbar">Enroll Now<i class="fi fi-rr-arrow-small-right"></i></a>
         <!-- Topbar Action -->
       </div>
     </div>
@@ -143,7 +142,10 @@
                 <div class="row align-items-center g-5">
                     <div class="col-lg-6 col-12">
                         <div class="lp-hero__content">
-                            <span class="lp-eyebrow">100% Online &middot; Canada</span>
+                            <div class="lp-hero__kicker">
+                                <span class="lp-eyebrow">100% Online &middot; Canada</span>
+                                <span class="lp-bts-chip">Back to School Offer &middot; 50% Off</span>
+                            </div>
                             <h1>Eyelash Extension Course</h1>
                             <p class="lp-hero__lead">
                                 Get on board with the industry's most exciting and profitable new service. Become a
@@ -171,8 +173,7 @@
                                 </li>
                             </ul>
                             <div class="lp-hero__cta">
-                                <a class="ed-btn" href="#register" data-cta="hero-primary">Enroll Now<i class="fi fi-rr-arrow-small-right"></i></a>
-                                <a class="ed-btn ed-btn--ghost" href="#curriculum">See the Curriculum<i class="fi fi-rr-arrow-small-right"></i></a>
+                                <a class="ed-btn" href="#register" data-cta="hero-primary">Get started<i class="fi fi-rr-arrow-small-right"></i></a>
                             </div>
                             <p class="lp-hero__note">Payment plans and financial partner funding available.</p>
                         </div>
@@ -183,6 +184,13 @@
                                 alt="Eyelash extension training with Mirage Spa Education" width="4000" height="6000"
                                 fetchpriority="high" />
                             <div class="lp-hero__badge">
+                                <span class="lp-hero__badge-icon" aria-hidden="true">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.5 10.2 12 5l9.5 5.2L12 15.4 2.5 10.2Z" fill="#fff"/>
+                                        <path d="M6.2 12.2v4.2c0 1.4 2.6 2.6 5.8 2.6s5.8-1.2 5.8-2.6v-4.2" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                                        <path d="M21.5 10.2v4.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
                                 <div>
                                     <strong>400 Hours</strong>
                                     <span>Complete certification program</span>
@@ -321,6 +329,10 @@
                 <div class="col-lg-5 col-12">
                     <div class="ed-course__details-meta lp-course-meta">
                         <div class="ed-course__info-box">
+                            <div class="lp-bts-ribbon">
+                                <span class="lp-bts-ribbon__label">Back to School</span>
+                                <span class="lp-bts-ribbon__text">50% off tuition &mdash; claim to see your new price</span>
+                            </div>
                             <div class="info-box-item">
                                 <div class="info-box-icon">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -344,7 +356,7 @@
                                 </div>
                                 <div class="info-box-content">
                                     <span class="info-box-label">Fee</span>
-                                    <span class="info-box-value price">$2,200</span>
+                                    <span class="info-box-value price lash-price" data-from="2,200" data-to="1,100">$2,200</span>
                                 </div>
                             </div>
 
@@ -377,8 +389,8 @@
                             </div>
 
                             <div class="info-box-cta mt-3">
-                                <a href="#register" class="ed-btn ed-btn-primary w-100" data-cta="info-box">
-                                    Enroll Now
+                                <a href="#register" class="ed-btn ed-btn-primary w-100 js-claim-offer" data-cta="info-box" data-claimed-label="Continue to register">
+                                    Claim Your Back to School Offer
                                 </a>
                             </div>
                         </div>
@@ -794,7 +806,7 @@
                         <div class="ed-course__pricing-featured-card">
                             <div class="pricing-header">
                                 <h5>Full Tuition</h5>
-                                <div class="pricing-amount">$2,200</div>
+                                <div class="pricing-amount lash-price" data-from="2,200" data-to="1,100">$2,200</div>
                                 <div class="pricing-note">+ applicable taxes</div>
                             </div>
                             <p class="pricing-description">Includes all supplies, digital materials (e-books), and
@@ -803,9 +815,6 @@
                                 <p class="mb-0"><strong>OR</strong> get funded through our financial partners with low
                                     monthly payment options.</p>
                             </div>
-                            <a href="#register" class="ed-btn ed-btn-primary w-100" data-cta="pricing-card">
-                                Register Now
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -1446,7 +1455,6 @@
             <p>Seats are held with the registration fee. Your kit ships as soon as you're enrolled, so you can start
                 practising right away.</p>
             <div class="lp-cta__actions">
-                <a class="ed-btn" href="#register" data-cta="footer-primary">Register Now<i class="fi fi-rr-arrow-small-right"></i></a>
                 <a class="ed-btn ed-btn--ghost-light" href="tel:18888292607" data-cta="footer-call">Call 1-888-829-2607</a>
             </div>
         </div>
@@ -2451,7 +2459,7 @@
   }
 
   .ed-course__pricing-featured-card::before {
-    content: "POPULAR";
+    content: "BACK TO SCHOOL";
     position: absolute;
     top: -12px;
     right: 30px;
@@ -2771,7 +2779,7 @@
     <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script>
     <script id="zsiqscript" src="https://salesiq.zohopublic.ca/widget?wc=01c825ca0a0046c693241456599167ba3dd56e5f7dc272ad4a68d39ad9b363dcec1f5d14770bfdbdd63090720e213e66" defer></script>
 
-    <script src="assets/landing/landing.js?v=2"></script>
+    <script src="assets/landing/landing.js?v=4"></script>
 </body>
 
 </html>

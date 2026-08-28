@@ -16,6 +16,9 @@
 
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     link.addEventListener('click', function (e) {
+      if (link.classList.contains('js-claim-offer') && !link.getAttribute('data-claimed')) {
+        return;
+      }
       var id = link.getAttribute('href');
       if (id === '#' || id.length < 2) return;
       var target = document.querySelector(id);
@@ -162,9 +165,109 @@
     });
   }
 
+  function scrollToHash(id) {
+    var target = document.querySelector(id);
+    if (!target) return;
+    var smoother = (window.ScrollSmoother && window.ScrollSmoother.get)
+      ? window.ScrollSmoother.get() : null;
+    if (smoother) {
+      smoother.scrollTo(target, true, 'top 100px');
+      return;
+    }
+    var top = target.getBoundingClientRect().top + window.pageYOffset - 100;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+
+  function rollPrice(el) {
+    var from = '$' + el.getAttribute('data-from');
+    var to = '$' + el.getAttribute('data-to');
+    var wrap = document.createElement('span');
+    wrap.className = 'price-roll';
+    var reels = [];
+    var i;
+    for (i = 0; i < to.length; i += 1) {
+      var ch = to.charAt(i);
+      if (ch >= '0' && ch <= '9') {
+        var box = document.createElement('span');
+        box.className = 'price-roll-digit';
+        var reel = document.createElement('span');
+        reel.className = 'price-roll-reel';
+        var d;
+        for (d = 0; d < 20; d += 1) {
+          var s = document.createElement('span');
+          s.textContent = d % 10;
+          reel.appendChild(s);
+        }
+        var fromDigit = parseInt(from.charAt(i), 10) || 0;
+        reel.style.transform = 'translateY(-' + fromDigit + 'em)';
+        reel.style.transitionDelay = (i * 110) + 'ms';
+        reel.setAttribute('data-target', 10 + parseInt(ch, 10));
+        box.appendChild(reel);
+        wrap.appendChild(box);
+        reels.push(reel);
+      } else {
+        var sc = document.createElement('span');
+        sc.textContent = ch;
+        wrap.appendChild(sc);
+      }
+    }
+    var was = document.createElement('span');
+    was.className = 'lash-price-was';
+    was.textContent = from;
+    var badge = document.createElement('span');
+    badge.className = 'lash-off-badge';
+    badge.textContent = '-50%';
+    el.textContent = '';
+    el.appendChild(was);
+    el.appendChild(wrap);
+    el.appendChild(badge);
+    void el.offsetHeight;
+    reels.forEach(function (reel) {
+      reel.style.transform = 'translateY(-' + reel.getAttribute('data-target') + 'em)';
+    });
+  }
+
+  function initBackToSchoolOffer() {
+    var buttons = document.querySelectorAll('.js-claim-offer');
+    if (!buttons.length) return;
+    var claimed = false;
+
+    function claimOffer() {
+      if (claimed) return;
+      claimed = true;
+      document.querySelectorAll('.lash-price').forEach(rollPrice);
+      document.querySelectorAll('.lp-bts-ribbon__text').forEach(function (el) {
+        el.textContent = 'Tuition is now $1,100 \u2014 enroll to lock in 50% off';
+      });
+      buttons.forEach(function (btn) {
+        btn.setAttribute('data-claimed', '1');
+        btn.setAttribute('href', '#register');
+        var icon = btn.querySelector('i');
+        var label = btn.getAttribute('data-claimed-label') || 'Continue to register';
+        setTimeout(function () {
+          btn.textContent = label;
+          if (icon) btn.appendChild(icon);
+        }, 1500);
+      });
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        if (claimed) return;
+        e.preventDefault();
+        var dest = btn.getAttribute('href');
+        claimOffer();
+        if (dest === '#overview') {
+          scrollToHash(dest);
+        }
+      });
+    });
+  }
+
   function bootLanding() {
     initReviews();
     initCurriculum();
+    initBackToSchoolOffer();
   }
 
   if (document.readyState === 'loading') {
